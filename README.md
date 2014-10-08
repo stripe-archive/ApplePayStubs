@@ -100,5 +100,9 @@ When the user finishes selecting a card, as usual `STPTestPaymentAuthorizationVi
 
 ```
 
-(Note: Stripe tokens created from Apple Pay work interchangably with those created using manually-collected credit card details).
+(Note for the above example: Stripe tokens created from Apple Pay work interchangably with those created using manually-collected credit card details).
 
+Example App / Learn More
+---
+
+If you'd like to see more examples of how to use this, we use ApplePayStubs in the [example app](https://github.com/stripe/stripe-ios/tree/master/Example) for our [main iOS library](https://github.com/stripe/stripe-ios).
