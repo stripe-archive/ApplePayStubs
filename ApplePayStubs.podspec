@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ApplePayStubs"
-  s.version      = "v0.1"
+  s.version      = "0.1"
   s.summary      = "Test your Apple Pay integration without Apple Pay"
 
   s.description  = <<-DESC
@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
 
   s.platform     = :ios, "8.0"
 
-  s.source       = { :git => "https://github.com/stripe/ApplePayStubs.git", :tag => s.version }
+  s.source       = { :git => "https://github.com/stripe/ApplePayStubs.git", :tag => "#v{s.version}" }
 
   s.source_files = "Classes", "Classes/**/*.{h,m}"
   s.exclude_files= "Classes/Exclude"
