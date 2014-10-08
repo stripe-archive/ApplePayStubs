@@ -106,3 +106,5 @@ Example App / Learn More
 ---
 
 If you'd like to see more examples of how to use this, we use ApplePayStubs in the [example app](https://github.com/stripe/stripe-ios/tree/master/Example) for our [main iOS library](https://github.com/stripe/stripe-ios).
+
+If you'd like to learn more about accepting payments on iOS with Stripe in general, read our [iOS tutorial](https://stripe.com/docs/mobile/ios).
