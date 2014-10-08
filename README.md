@@ -4,11 +4,11 @@ ApplePayStubs
 What is this?
 ---
 
-ApplePay is awesome, and like many developers we're excited to work with it. However, testing and developing for it is currently difficult as Apple hasn't released any public versions of the iOS SDK with it enabled. Furthermore, even when it is released, it will require a new iPhone to actually see and test the UI.
+ApplePay is awesome, and like many developers we're excited to work with it. However, since Apple hasn't yet released any public versions of the iOS SDK with it enabled, we want to make it easier for developers to plan and test their Apple Pay integrations.
 
 We've created a replacement component for `PKPaymentAuthorizationViewController` (the primary class involved in ApplePay transactions) for businesses interested in working with ApplePay called `STPTestPaymentAuthorizationViewController`. These classes appear visually similar and behave almost identically. The primary difference is that `STPTestPaymentAuthorizationViewController` yields test credit cards and addresses instead of accessing actual information stored on a user's iPhone. You can use it to build and test all of your UI and application logic around ApplePay, and switch it out for the real thing once ApplePay is publicly released.
 
-Please note that this is for *testing purposes only*.
+Please note that this is for **testing and development purposes only**.
 
 Dependencies
 ---
