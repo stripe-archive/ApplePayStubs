@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/stripe/ApplePayStubs.git", :tag => "v#{s.version}" }
   s.source_files = "Classes", "Classes/**/*.{h,m}"
   s.exclude_files= "Classes/Exclude"
-  s.framework    = "PassKit"
+  s.weak_framework    = "PassKit"
   s.requires_arc = true
   s.prefix_header_contents = "#define STRIPE_ENABLE_APPLEPAY"
 end
