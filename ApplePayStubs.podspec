@@ -14,4 +14,5 @@ Pod::Spec.new do |s|
   s.exclude_files= "Classes/Exclude"
   s.framework    = "PassKit"
   s.requires_arc = true
+  s.prefix_header_contents = "#define STRIPE_ENABLE_APPLEPAY"
 end
