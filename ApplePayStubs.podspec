@@ -11,6 +11,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/stripe/ApplePayStubs.git", :tag => "v#{s.version}" }
   s.source_files = "Classes", "Classes/**/*.{h,m,xib}"
+  s.resources    = "Classes/**/*.xib"
   s.exclude_files= "Classes/Exclude"
   s.framework    = "PassKit"
   s.requires_arc = true
