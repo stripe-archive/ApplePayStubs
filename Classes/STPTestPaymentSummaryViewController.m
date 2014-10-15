@@ -163,6 +163,9 @@ NSString * const STPTestPaymentSectionTitlePayment = @"Payment";
         PKPaymentSummaryItem *item = self.summaryItems[indexPath.row];
         NSString *text = [item.label uppercaseString];
         if (indexPath.row == [self.tableView numberOfRowsInSection:indexPath.section] - 1) {
+            if (text == nil) {
+                text = @"";
+            }
             text = [@"PAY " stringByAppendingString:text];
         }
         cell.textLabel.text = text;
