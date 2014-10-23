@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ApplePayStubs"
-  s.version      = "0.1.1"
+  s.version      = "0.1.2"
   s.summary      = "Test your Apple Pay integration without Apple Pay"
   s.description  = <<-DESC
                   ApplePayStubs lets you test your Apple Pay integration without needing an iPhone 6 and the as-yet-unreleased Apple Pay SDK.
