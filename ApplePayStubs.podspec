@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/stripe/ApplePayStubs"
   s.license      = { :type => "MIT", :file => "LICENSE.txt" }
   s.author       = { "Stripe" => "support+github@stripe.com" }
-  s.platform     = :ios, "7.0"
+  s.platform     = :ios, "6.0"
   s.source       = { :git => "https://github.com/stripe/ApplePayStubs.git", :tag => "v#{s.version}" }
   s.source_files = "Classes", "Classes/**/*.{h,m}"
   s.resources    = "Classes/**/*.xib"
