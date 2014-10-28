@@ -22,6 +22,7 @@
     NSMutableDictionary *card = [NSMutableDictionary new];
     card[@"name"] = @"Stripe Test Card";
     card[@"number"] = @"4242424242424242";
+    card[@"last4"] = [card[@"number"] substringFromIndex:12];
     card[@"expMonth"] = @12;
     card[@"expYear"] = @2030;
     card[@"cvc"] = @"123";
@@ -32,6 +33,7 @@
     NSMutableDictionary *card = [NSMutableDictionary new];
     card[@"name"] = @"Stripe Test Card";
     card[@"number"] = @"4000000000000002";
+    card[@"last4"] = [card[@"number"] substringFromIndex:12];
     card[@"expMonth"] = @12;
     card[@"expYear"] = @2030;
     card[@"cvc"] = @"123";
