@@ -35,6 +35,11 @@
     STPTestPaymentSummaryViewController *summary = [[STPTestPaymentSummaryViewController alloc] initWithPaymentRequest:self.paymentRequest];
     summary.delegate = self.delegate;
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:summary];
+	[navController.navigationBar setBackgroundImage:[UIImage new]
+									  forBarMetrics:UIBarMetricsDefault];
+	navController.navigationBar.shadowImage = [UIImage new];
+	navController.navigationBar.translucent = YES;
+	
     [self addChildViewController:navController];
     navController.view.frame = self.view.bounds;
     [self.view addSubview:navController.view];
@@ -51,8 +56,8 @@
 @implementation STPTestPaymentPresentationController
 - (CGRect)frameOfPresentedViewInContainerView {
     CGRect rect = [super frameOfPresentedViewInContainerView];
-    rect.origin.y += 30;
-    rect.size.height -= 30;
+    rect.origin.y += 150;
+    rect.size.height -= 150;
     return rect;
 }
 @end

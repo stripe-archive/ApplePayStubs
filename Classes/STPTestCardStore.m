@@ -51,7 +51,7 @@
     NSDictionary *card = (NSDictionary *)item;
     NSString *number = card[@"number"];
     NSString *suffix = [number substringFromIndex:MAX((NSInteger)[number length] - 4, 0)];
-    return @[card[@"name"], [NSString stringWithFormat:@"**** **** **** %@", suffix]];
+    return @[card[@"name"], [NSString stringWithFormat:@"(••••) %@", suffix]];
 }
 
 @end

@@ -15,14 +15,26 @@
 #import "STPTestShippingMethodStore.h"
 #import "PKPayment+STPTestKeys.h"
 
+@interface PKPaymentAuthorizationFooterView : UIView {
+
+}
+
+- (void)setState:(int)arg1;
+
+@end
+
+@end
+
 NSString *const STPTestPaymentAuthorizationSummaryItemIdentifier = @"STPTestPaymentAuthorizationSummaryItemIdentifier";
 NSString *const STPTestPaymentAuthorizationTestDataIdentifier = @"STPTestPaymentAuthorizationTestDataIdentifier";
+NSString *const STPTestPaymentAuthorizationTestTotalDataIdentifier = @"STPTestPaymentAuthorizationTestTotalDataIdentifier";
 
-NSString *const STPTestPaymentSectionTitleCards = @"Credit Card";
-NSString *const STPTestPaymentSectionTitleBillingAddress = @"Billing Address";
-NSString *const STPTestPaymentSectionTitleShippingAddress = @"Shipping Address";
-NSString *const STPTestPaymentSectionTitleShippingMethod = @"Shipping Method";
+NSString *const STPTestPaymentSectionTitleCards = @"Card";
+NSString *const STPTestPaymentSectionTitleBillingAddress = @"Billing";
+NSString *const STPTestPaymentSectionTitleShippingAddress = @"Shipping";
+NSString *const STPTestPaymentSectionTitleShippingMethod = @"Method";
 NSString *const STPTestPaymentSectionTitlePayment = @"Payment";
+NSString *const STPTestPaymentSectionTitleTotalPayment = @"Total";
 
 @interface STPTestPaymentSummaryItemCell : UITableViewCell
 @end
@@ -30,12 +42,15 @@ NSString *const STPTestPaymentSectionTitlePayment = @"Payment";
 @interface STPTestPaymentDataCell : UITableViewCell
 @end
 
+@interface STPTestPaymentTotalDataCell : STPTestPaymentDataCell
+@end
+
 @interface STPTestPaymentSummaryViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet UIButton *payButton;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) PKPaymentRequest *paymentRequest;
 @property (nonatomic) NSArray *summaryItems;
+@property (nonatomic) PKPaymentAuthorizationFooterView *footerView;
 @property (nonatomic) STPTestCardStore *cardStore;
 @property (nonatomic) STPTestAddressStore *billingAddressStore;
 @property (nonatomic) STPTestAddressStore *shippingAddressStore;
@@ -54,8 +69,6 @@ NSString *const STPTestPaymentSectionTitlePayment = @"Payment";
         _billingAddressStore = [STPTestAddressStore new];
         _shippingAddressStore = [STPTestAddressStore new];
         _shippingMethodStore = [[STPTestShippingMethodStore alloc] initWithShippingMethods:paymentRequest.shippingMethods];
-        self.navigationItem.rightBarButtonItem =
-            [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
     }
     return self;
 }
@@ -73,17 +86,62 @@ NSString *const STPTestPaymentSectionTitlePayment = @"Payment";
         [array addObject:STPTestPaymentSectionTitleShippingMethod];
     }
     [array addObject:STPTestPaymentSectionTitlePayment];
+	[array addObject:STPTestPaymentSectionTitleTotalPayment];
     self.sectionTitles = [array copy];
+}
+
+- (void)releaseButAction:(id)sender {
+	self.footerView.state = 5;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self updateSectionTitles];
+	self.tableView.backgroundColor = [UIColor clearColor];
     [self.tableView registerClass:[STPTestPaymentSummaryItemCell class] forCellReuseIdentifier:STPTestPaymentAuthorizationSummaryItemIdentifier];
     [self.tableView registerClass:[STPTestPaymentDataCell class] forCellReuseIdentifier:STPTestPaymentAuthorizationTestDataIdentifier];
+	[self.tableView registerClass:[STPTestPaymentTotalDataCell class] forCellReuseIdentifier:STPTestPaymentAuthorizationTestTotalDataIdentifier];
+	
     if (self.paymentRequest.requiredShippingAddressFields != PKAddressFieldNone) {
         [self didSelectShippingAddress];
     }
+	
+	UIView *container = [[UIView alloc] initWithFrame:CGRectMake(375/2, 517, 0, 200)];
+	container.backgroundColor = [UIColor purpleColor];
+	self.footerView = [[PKPaymentAuthorizationFooterView alloc] initWithFrame:CGRectZero];
+	
+	UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 400, 375, 200)];;
+	[self.view addSubview:view1];
+	
+	UITapGestureRecognizer *touchOnView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(releaseButAction:)];
+	
+	[touchOnView setNumberOfTapsRequired:1];
+	[touchOnView setNumberOfTouchesRequired:1];
+	[view1 addGestureRecognizer:touchOnView];
+	
+	[self.footerView setTranslatesAutoresizingMaskIntoConstraints:YES];
+	[self.footerView setState:0];
+	[self.footerView setFrame:CGRectZero];
+	
+	[container addSubview:self.footerView];
+	[self.view addSubview:container];
+	
+	UIButton *button = [[UIButton alloc] init];
+	
+	[button setTitle:@"Cancel" forState:UIControlStateNormal];
+	[button setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+	[button addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
+	
+	[button sizeToFit];
+	
+	CGRect frame = button.frame;
+	frame.size.height += 1;
+	button.frame = frame;
+	
+	UIBarButtonItem *fixed = [[UIBarButtonItem alloc] initWithCustomView:button];
+	self.navigationItem.rightBarButtonItem = fixed;
+	
+	//[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -126,8 +184,10 @@ NSString *const STPTestPaymentSectionTitlePayment = @"Payment";
                                            }];
 }
 
-- (void)cancel:(id)sender {
+- (IBAction)cancel:(id)sender {
     [self.delegate paymentAuthorizationViewControllerDidFinish:(PKPaymentAuthorizationViewController *)self];
+	
+	
 }
 
 #pragma mark - UITableViewDataSource
@@ -140,18 +200,100 @@ NSString *const STPTestPaymentSectionTitlePayment = @"Payment";
     return self.sectionTitles[section];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+	NSString *title = self.sectionTitles[section];
+	if ([title isEqualToString:STPTestPaymentSectionTitlePayment]) {
+		return 16.0;
+	}
+	if ([title isEqualToString:STPTestPaymentSectionTitleTotalPayment]) {
+		return 16.0;
+	}
+	else {
+		return 0.5;
+	}
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+	NSString *title = self.sectionTitles[section];
+	if (![title isEqualToString:STPTestPaymentSectionTitleTotalPayment]) {
+		return 0;
+	}
+	else {
+		return 0.5;
+	}
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+	UIView *view = [[UIView alloc] init];
+	NSString *title = self.sectionTitles[section];
+	
+	if (![title isEqualToString:STPTestPaymentSectionTitleTotalPayment]) {
+		return nil;
+	}
+	
+	CGFloat x = 16.0;
+	
+	UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(x, 0, tableView.frame.size.width, 0.5)];
+	
+	separator.backgroundColor = tableView.separatorColor;
+	
+	[view addSubview:separator];
+	
+	return view;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+	UIView *view = [[UIView alloc] init];
+	NSString *title = self.sectionTitles[section];
+	
+	CGFloat x = 16.0;
+	
+	if (section == 0 || title == STPTestPaymentSectionTitlePayment) {
+		x = 0;
+	}
+	
+	UIView *separator = [[UIView alloc] initWithFrame:CGRectMake(x, 0, tableView.frame.size.width, 0.5)];
+	
+	if ([title isEqualToString:STPTestPaymentSectionTitleTotalPayment]) {
+		separator.frame = CGRectMake(x, 15.0, tableView.frame.size.width, 0.5);
+	}
+	
+	separator.backgroundColor = tableView.separatorColor;
+	
+	[view addSubview:separator];
+	
+	return view;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     NSString *title = self.sectionTitles[section];
-    if ([title isEqualToString:STPTestPaymentSectionTitlePayment]) {
-        return self.summaryItems.count;
+	
+	if ([title isEqualToString:STPTestPaymentSectionTitlePayment]) {
+        return self.summaryItems.count - 1;
     }
+	else if ([title isEqualToString:STPTestPaymentSectionTitleTotalPayment]) {
+		return 1;
+	}
+	
     return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *title = self.sectionTitles[indexPath.section];
-    NSString *identifier = [title isEqualToString:STPTestPaymentSectionTitlePayment] ? STPTestPaymentAuthorizationTestDataIdentifier :
-                                                                                       STPTestPaymentAuthorizationSummaryItemIdentifier;
+	NSString *identifier;
+	
+	if ([title isEqualToString:STPTestPaymentSectionTitlePayment]) {
+		identifier = STPTestPaymentAuthorizationTestDataIdentifier;
+	}
+	else if ([title isEqualToString:STPTestPaymentSectionTitleTotalPayment]) {
+		identifier = STPTestPaymentAuthorizationTestTotalDataIdentifier;
+	}
+	else {
+		identifier = STPTestPaymentAuthorizationSummaryItemIdentifier;
+	}
+	
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     [self configureCell:cell forRowAtIndexPath:indexPath];
     return cell;
@@ -159,7 +301,7 @@ NSString *const STPTestPaymentSectionTitlePayment = @"Payment";
 
 - (void)configureCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *title = self.sectionTitles[indexPath.section];
-    if ([title isEqualToString:STPTestPaymentSectionTitlePayment]) {
+    if ([title isEqualToString:STPTestPaymentSectionTitlePayment] || [title isEqualToString:STPTestPaymentSectionTitleTotalPayment]) {
         cell.accessoryType = UITableViewCellAccessoryNone;
         PKPaymentSummaryItem *item = self.summaryItems[indexPath.row];
         NSString *text = [item.label uppercaseString];
@@ -171,7 +313,13 @@ NSString *const STPTestPaymentSectionTitlePayment = @"Payment";
         }
         cell.textLabel.text = text;
 
-        cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", item.amount.stringValue, self.paymentRequest.currencyCode];
+		NSNumberFormatter *_currencyFormatter = [[NSNumberFormatter alloc] init];
+		[_currencyFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+		[_currencyFormatter setCurrencyCode:self.paymentRequest.currencyCode];
+		[_currencyFormatter setNegativeFormat:@"-¤#,##0.00"];
+		
+		cell.detailTextLabel.text = [_currencyFormatter stringFromNumber:item.amount];
+		
         return;
     }
 
@@ -179,16 +327,34 @@ NSString *const STPTestPaymentSectionTitlePayment = @"Payment";
     NSArray *descriptions = [store descriptionsForItem:store.selectedItem];
 
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.text = descriptions[0];
-    cell.detailTextLabel.text = descriptions[1];
+	
+	NSString *line1 = [descriptions[0] uppercaseString];
+	NSString *line2 = [descriptions[1] uppercaseString];
+	
+	
+    cell.textLabel.text = [NSString stringWithFormat:@"%@\n%@", line1, line2];
+	
+	NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc]initWithString:cell.textLabel.text attributes:nil];
+	
+	NSMutableParagraphStyle *paragrahStyle = [[NSMutableParagraphStyle alloc] init];
+	[paragrahStyle setLineSpacing:0.5];
+	[attributedString addAttribute:NSParagraphStyleAttributeName value:paragrahStyle range:NSMakeRange(0, [cell.textLabel.text length])];
+	
+	cell.textLabel.attributedText = attributedString ;
+	cell.textLabel.numberOfLines = 0;
+	
+    cell.detailTextLabel.text = [title uppercaseString];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *title = self.sectionTitles[indexPath.section];
     if ([title isEqualToString:STPTestPaymentSectionTitlePayment]) {
-        return 20.0f;
+        return 19.0f;
     }
-    return 44.0f;
+	else if ([title isEqualToString:STPTestPaymentSectionTitleTotalPayment]) {
+		return 48.0f;
+	}
+    return 57.5f;
 }
 
 - (id<STPTestDataStore>)storeForSection:(NSString *)section {
@@ -240,6 +406,7 @@ NSString *const STPTestPaymentSectionTitlePayment = @"Payment";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+	
     id<STPTestDataStore> store = [self storeForSection:self.sectionTitles[indexPath.section]];
     STPTestDataTableViewController *controller = [[STPTestDataTableViewController alloc] initWithStore:store];
     if (store == self.shippingAddressStore) {
@@ -269,6 +436,7 @@ NSString *const STPTestPaymentSectionTitlePayment = @"Payment";
             }
         };
     }
+	
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -276,11 +444,37 @@ NSString *const STPTestPaymentSectionTitlePayment = @"Payment";
 
 @implementation STPTestPaymentSummaryItemCell
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
-    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
+    self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
+		self.contentView.backgroundColor = [UIColor clearColor];
+		
+		self.textLabel.font = [UIFont systemFontOfSize:13.0];
+		self.textLabel.numberOfLines = 2;
+		self.detailTextLabel.font = [UIFont systemFontOfSize:13.0];
+		
+		self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		
+		UIButton *accessory = self.subviews[1];
+		UIImageView *imageView = accessory.subviews[0];
+		
+		imageView.image = [imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     }
     return self;
+}
+
+- (void) layoutSubviews {
+	[super layoutSubviews];
+	
+	self.detailTextLabel.frame = CGRectMake(16, self.textLabel.frame.origin.y + 1, self.detailTextLabel.frame.size.width, self.detailTextLabel.frame.size.height);
+	
+	self.textLabel.frame = CGRectMake(111, self.textLabel.frame.origin.y + 1, self.textLabel.frame.size.width, self.textLabel.frame.size.height);
+	
+	UIButton *accessory = self.subviews[1];
+	
+	CGRect frame = accessory.frame;
+	frame.origin.x--;
+	accessory.frame = frame;
 }
 @end
 
@@ -289,10 +483,43 @@ NSString *const STPTestPaymentSectionTitlePayment = @"Payment";
     self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-        self.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0];
-        self.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0];
+		self.contentView.backgroundColor = [UIColor clearColor];
+		self.textLabel.font = [UIFont systemFontOfSize:13.0];
+		self.textLabel.textColor = self.detailTextLabel.textColor;
+		
+        self.detailTextLabel.font = [UIFont systemFontOfSize:13.0];
+		self.detailTextLabel.textColor = [UIColor blackColor];
     }
     return self;
+}
+
+- (void) layoutSubviews {
+	[super layoutSubviews];
+	
+	self.textLabel.frame = CGRectMake(111, self.textLabel.frame.origin.y, 200, self.textLabel.frame.size.height);
+}
+@end
+
+@implementation STPTestPaymentTotalDataCell
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+	self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
+	if (self) {
+		self.textLabel.textColor = [UIColor blackColor];
+		self.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:20.0];
+	}
+	return self;
+}
+
+- (void) layoutSubviews {
+	[super layoutSubviews];
+	
+	CGRect frame = self.textLabel.frame;
+	frame.origin.y -= 4;
+	self.textLabel.frame = frame;
+	
+	frame = self.detailTextLabel.frame;
+	frame.origin.y -= 4;
+	self.detailTextLabel.frame = frame;
 }
 @end
 
