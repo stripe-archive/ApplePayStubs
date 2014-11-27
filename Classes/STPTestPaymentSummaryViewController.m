@@ -16,7 +16,7 @@
 #import "PKPayment+STPTestKeys.h"
 
 @interface PKPaymentAuthorizationFooterView : UIView {
-
+	
 }
 
 - (void)setState:(int)arg1;

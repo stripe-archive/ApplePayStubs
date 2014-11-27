@@ -21,44 +21,44 @@
 @implementation STPTestPaymentAuthorizationViewController
 
 - (instancetype)initWithPaymentRequest:(PKPaymentRequest *)paymentRequest {
-    self = [super initWithNibName:nil bundle:nil];
-    if (self) {
-        _paymentRequest = paymentRequest;
-        self.transitioningDelegate = self;
-        self.modalPresentationStyle = UIModalPresentationCustom;
-    }
-    return self;
+	self = [super initWithNibName:nil bundle:nil];
+	if (self) {
+		_paymentRequest = paymentRequest;
+		self.transitioningDelegate = self;
+		self.modalPresentationStyle = UIModalPresentationCustom;
+	}
+	return self;
 }
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    STPTestPaymentSummaryViewController *summary = [[STPTestPaymentSummaryViewController alloc] initWithPaymentRequest:self.paymentRequest];
-    summary.delegate = self.delegate;
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:summary];
+	[super viewDidLoad];
+	STPTestPaymentSummaryViewController *summary = [[STPTestPaymentSummaryViewController alloc] initWithPaymentRequest:self.paymentRequest];
+	summary.delegate = self.delegate;
+	UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:summary];
 	[navController.navigationBar setBackgroundImage:[UIImage new]
 									  forBarMetrics:UIBarMetricsDefault];
 	navController.navigationBar.shadowImage = [UIImage new];
 	navController.navigationBar.translucent = YES;
 	
-    [self addChildViewController:navController];
-    navController.view.frame = self.view.bounds;
-    [self.view addSubview:navController.view];
+	[self addChildViewController:navController];
+	navController.view.frame = self.view.bounds;
+	[self.view addSubview:navController.view];
 }
 
 #pragma mark - UIViewControllerTransitioningDelegate
 
 - (UIPresentationController *)presentationControllerForPresentedViewController:(UIViewController *)presented presentingViewController:(UIViewController *)presenting sourceViewController:(UIViewController *)source {
-    return [[STPTestPaymentPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
+	return [[STPTestPaymentPresentationController alloc] initWithPresentedViewController:presented presentingViewController:presenting];
 }
 
 @end
 
 @implementation STPTestPaymentPresentationController
 - (CGRect)frameOfPresentedViewInContainerView {
-    CGRect rect = [super frameOfPresentedViewInContainerView];
-    rect.origin.y += 150;
-    rect.size.height -= 150;
-    return rect;
+	CGRect rect = [super frameOfPresentedViewInContainerView];
+	rect.origin.y += 150;
+	rect.size.height -= 150;
+	return rect;
 }
 @end
 
