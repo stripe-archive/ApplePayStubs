@@ -46,8 +46,6 @@ NSString *const STPTestPaymentSectionTitleTotalPayment = @"Total";
 @end
 
 @interface STPTestPaymentSummaryViewController () <UITableViewDataSource, UITableViewDelegate>
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (weak, nonatomic) IBOutlet UIButton *payButton;
 @property (nonatomic) PKPaymentRequest *paymentRequest;
 @property (nonatomic) NSArray *summaryItems;
 @property (nonatomic) PKPaymentAuthorizationFooterView *footerView;
@@ -150,8 +148,6 @@ NSString *const STPTestPaymentSectionTitleTotalPayment = @"Total";
 }
 
 - (IBAction)makePayment:(id)sender {
-    self.payButton.hidden = YES;
-    [self.activityIndicator startAnimating];
 
     PKPayment *payment = [PKPayment new];
     NSDictionary *card = self.cardStore.selectedItem;
@@ -174,12 +170,9 @@ NSString *const STPTestPaymentSectionTitleTotalPayment = @"Total";
 #pragma clang diagnostic pop
 
     PKPaymentAuthorizationViewController *auth = (PKPaymentAuthorizationViewController *)self;
-
-    [self.activityIndicator startAnimating];
     [self.delegate paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)auth
                                   didAuthorizePayment:payment
                                            completion:^(PKPaymentAuthorizationStatus status) {
-                                               [self.activityIndicator stopAnimating];
                                                [self.delegate paymentAuthorizationViewControllerDidFinish:auth];
                                            }];
 }
@@ -382,8 +375,6 @@ NSString *const STPTestPaymentSectionTitleTotalPayment = @"Total";
 
 - (void)didSelectShippingAddress {
     if ([self.delegate respondsToSelector:@selector(paymentAuthorizationViewController:didSelectShippingAddress:completion:)]) {
-        [self.activityIndicator startAnimating];
-        self.payButton.enabled = NO;
         self.tableView.userInteractionEnabled = NO;
         ABRecordRef record = [self.shippingAddressStore contactForSelectedItemObscure:YES];
         [self.delegate paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)self
@@ -397,9 +388,7 @@ NSString *const STPTestPaymentSectionTitleTotalPayment = @"Total";
                                                    [self.shippingMethodStore setShippingMethods:shippingMethods];
                                                    [self updateSectionTitles];
                                                    [self.tableView reloadData];
-                                                   self.payButton.enabled = YES;
                                                    self.tableView.userInteractionEnabled = YES;
-                                                   [self.activityIndicator stopAnimating];
                                                }];
     }
 }
@@ -415,8 +404,6 @@ NSString *const STPTestPaymentSectionTitleTotalPayment = @"Total";
     if (store == self.shippingMethodStore) {
         controller.callback = ^void(id item) {
             if ([self.delegate respondsToSelector:@selector(paymentAuthorizationViewController:didSelectShippingMethod:completion:)]) {
-                [self.activityIndicator startAnimating];
-                self.payButton.enabled = NO;
                 self.tableView.userInteractionEnabled = NO;
                 PKPaymentAuthorizationViewController *vc = (PKPaymentAuthorizationViewController *)self;
                 [self.delegate paymentAuthorizationViewController:vc
@@ -429,9 +416,7 @@ NSString *const STPTestPaymentSectionTitleTotalPayment = @"Total";
                                                            self.summaryItems = summaryItems;
                                                            [self updateSectionTitles];
                                                            [self.tableView reloadData];
-                                                           self.payButton.enabled = YES;
                                                            self.tableView.userInteractionEnabled = YES;
-                                                           [self.activityIndicator stopAnimating];
                                                        }];
             }
         };
