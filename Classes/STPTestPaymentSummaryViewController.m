@@ -144,7 +144,8 @@ NSString *const STPTestPaymentSectionTitleTotalPayment = @"Total";
 }
 
 - (IBAction)makePayment:(id)sender {
-
+    self.footerView.state = 4;
+    
     PKPayment *payment = [PKPayment new];
     NSDictionary *card = self.cardStore.selectedItem;
 
@@ -169,6 +170,7 @@ NSString *const STPTestPaymentSectionTitleTotalPayment = @"Total";
     [self.delegate paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)auth
                                   didAuthorizePayment:payment
                                            completion:^(PKPaymentAuthorizationStatus status) {
+                                               self.footerView.state = 5;
                                                [self.delegate paymentAuthorizationViewControllerDidFinish:auth];
                                            }];
 }
@@ -377,6 +379,7 @@ NSString *const STPTestPaymentSectionTitleTotalPayment = @"Total";
                                  didSelectShippingAddress:record
                                                completion:^(PKPaymentAuthorizationStatus status, NSArray *shippingMethods, NSArray *summaryItems) {
                                                    if (status == PKPaymentAuthorizationStatusFailure) {
+                                                       self.footerView.state = 6;
                                                        [self.delegate paymentAuthorizationViewControllerDidFinish:(PKPaymentAuthorizationViewController *)self];
                                                        return;
                                                    }
