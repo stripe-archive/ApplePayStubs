@@ -499,12 +499,10 @@ NSString *const STPTestPaymentSectionTitleTotalPayment = @"Total";
 	[super layoutSubviews];
 	
 	CGRect frame = self.textLabel.frame;
-	frame.origin.y -= 4;
-	self.textLabel.frame = frame;
-	
+    self.textLabel.frame = CGRectOffset(frame, 0, -4);
+    
 	frame = self.detailTextLabel.frame;
-	frame.origin.y -= 4;
-	self.detailTextLabel.frame = frame;
+    self.detailTextLabel.frame = CGRectOffset(frame, 0, -4);
 }
 @end
 
