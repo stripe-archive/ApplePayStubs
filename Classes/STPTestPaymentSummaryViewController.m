@@ -23,8 +23,6 @@
 
 @end
 
-@end
-
 NSString *const STPTestPaymentAuthorizationSummaryItemIdentifier = @"STPTestPaymentAuthorizationSummaryItemIdentifier";
 NSString *const STPTestPaymentAuthorizationTestDataIdentifier = @"STPTestPaymentAuthorizationTestDataIdentifier";
 NSString *const STPTestPaymentAuthorizationTestTotalDataIdentifier = @"STPTestPaymentAuthorizationTestTotalDataIdentifier";
