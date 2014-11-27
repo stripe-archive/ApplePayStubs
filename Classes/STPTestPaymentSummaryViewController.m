@@ -168,8 +168,11 @@ NSString *const STPTestPaymentSectionTitleTotalPayment = @"Total";
     [self.delegate paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)auth
                                   didAuthorizePayment:payment
                                            completion:^(PKPaymentAuthorizationStatus status) {
-                                               self.footerView.state = 5;
+											   self.footerView.state = 5;
+											   
+											   dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
                                                [self.delegate paymentAuthorizationViewControllerDidFinish:auth];
+											   });
                                            }];
 }
 
