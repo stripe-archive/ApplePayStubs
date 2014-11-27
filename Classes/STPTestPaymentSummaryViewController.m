@@ -489,7 +489,8 @@ NSString *const STPTestPaymentSectionTitleTotalPayment = @"Total";
 	self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:reuseIdentifier];
 	if (self) {
 		self.textLabel.textColor = [UIColor blackColor];
-		self.detailTextLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:20.0];
+		self.detailTextLabel.font = [UIFont systemFontOfSize:20.0];
+
 	}
 	return self;
 }
