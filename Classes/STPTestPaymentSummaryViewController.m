@@ -88,10 +88,6 @@ NSString *const STPTestPaymentSectionTitleTotalPayment = @"Total";
     self.sectionTitles = [array copy];
 }
 
-- (void)releaseButAction:(id)sender {
-	self.footerView.state = 5;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self updateSectionTitles];
@@ -110,9 +106,9 @@ NSString *const STPTestPaymentSectionTitleTotalPayment = @"Total";
 	
 	UIView *view1 = [[UIView alloc] initWithFrame:CGRectMake(0, 400, 375, 200)];;
 	[self.view addSubview:view1];
-	
-	UITapGestureRecognizer *touchOnView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(releaseButAction:)];
-	
+
+    UITapGestureRecognizer *touchOnView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(makePayment:)];
+
 	[touchOnView setNumberOfTapsRequired:1];
 	[touchOnView setNumberOfTouchesRequired:1];
 	[view1 addGestureRecognizer:touchOnView];
