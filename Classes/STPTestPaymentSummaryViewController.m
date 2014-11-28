@@ -328,7 +328,10 @@ NSString *const STPTestPaymentSectionTitleTotalPayment = @"Total";
 	NSString *line1 = [descriptions[0] uppercaseString];
 	NSString *line2 = [descriptions[1] uppercaseString];
 	
-	
+	if ([store.selectedItem isKindOfClass:[PKShippingMethod class]]) {
+		PKShippingMethod *shippingMethod = store.selectedItem;
+		line2 = [shippingMethod.detail uppercaseString];
+	}
     cell.textLabel.text = [NSString stringWithFormat:@"%@\n%@", line1, line2];
 	
 	NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc]initWithString:cell.textLabel.text attributes:nil];
