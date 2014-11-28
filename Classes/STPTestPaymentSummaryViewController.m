@@ -294,10 +294,15 @@ NSString *const STPTestPaymentSectionTitleTotalPayment = @"Total";
 - (void)configureCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *title = self.sectionTitles[indexPath.section];
     if ([title isEqualToString:STPTestPaymentSectionTitlePayment] || [title isEqualToString:STPTestPaymentSectionTitleTotalPayment]) {
+		PKPaymentSummaryItem *item = self.summaryItems[indexPath.row];
+		
+		if ([title isEqualToString:STPTestPaymentSectionTitleTotalPayment]) {
+			item = self.summaryItems.lastObject;
+		}
+		
         cell.accessoryType = UITableViewCellAccessoryNone;
-        PKPaymentSummaryItem *item = self.summaryItems[indexPath.row];
         NSString *text = [item.label uppercaseString];
-        if (indexPath.row == [self.tableView numberOfRowsInSection:indexPath.section] - 1) {
+        if ([title isEqualToString:STPTestPaymentSectionTitleTotalPayment] && indexPath.row == [self.tableView numberOfRowsInSection:indexPath.section] - 1) {
             if (text == nil) {
                 text = @"";
             }
