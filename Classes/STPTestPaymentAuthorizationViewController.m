@@ -13,6 +13,7 @@
 
 @interface STPTestPaymentAuthorizationViewController()<UIViewControllerTransitioningDelegate>
 @property (nonatomic) PKPaymentRequest *paymentRequest;
+@property (nonatomic) UIView *dimmingView2;
 @end
 
 @interface STPTestPaymentPresentationController : UIPresentationController
@@ -28,6 +29,26 @@
 		self.modalPresentationStyle = UIModalPresentationCustom;
 	}
 	return self;
+}
+
+- (void)viewWillLayoutSubviews {
+	if (self.dimmingView2 == nil) {
+		self.dimmingView2 = [[UIView alloc] initWithFrame:self.view.superview.frame];
+		self.dimmingView2.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
+		self.dimmingView2.layer.opacity = 0.0;
+		
+		CABasicAnimation *fadeInAnimation;
+		fadeInAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+		fadeInAnimation.duration = 0.15;
+		fadeInAnimation.fromValue = [NSNumber numberWithFloat:0.0];
+		fadeInAnimation.toValue = [NSNumber numberWithFloat:1.0];
+		
+		self.dimmingView2.layer.opacity = 1.0;
+		
+		[self.dimmingView2.layer addAnimation:fadeInAnimation forKey:@"opacity"];
+		
+		[self.view.superview insertSubview:self.dimmingView2 atIndex:0];
+	}
 }
 
 - (void)viewDidLoad {
