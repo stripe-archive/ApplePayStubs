@@ -98,6 +98,8 @@ NSString *const STPTestPaymentSectionTitleTotalPayment = @"Total";
         [self didSelectShippingAddress];
     }
 	
+	[(id)self.knockoutView initWithStyle:2010];
+	
 	UIView *container = [[UIView alloc] initWithFrame:CGRectMake(375/2, 517, 0, 200)];
 	container.backgroundColor = [UIColor purpleColor];
 	self.footerView = [[PKPaymentAuthorizationFooterView alloc] initWithFrame:CGRectZero];
