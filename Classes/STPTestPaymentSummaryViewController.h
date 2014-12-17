@@ -15,6 +15,8 @@
 
 - (instancetype)initWithPaymentRequest:(PKPaymentRequest *)paymentRequest;
 @property(nonatomic, assign)id<PKPaymentAuthorizationViewControllerDelegate>delegate;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *knockoutView;
 
 @end
 

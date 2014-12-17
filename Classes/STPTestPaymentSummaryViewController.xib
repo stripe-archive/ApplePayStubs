@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14A386a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment version="2048" defaultVersion="1808" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment version="2048" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="STPTestPaymentSummaryViewController">
             <connections>
-                <outlet property="activityIndicator" destination="HWL-sz-1EN" id="Grg-Rf-Wnr"/>
-                <outlet property="payButton" destination="3W7-r3-MuN" id="DIj-aN-z10"/>
-                <outlet property="tableView" destination="7xh-V2-Cso" id="dYK-cV-NyK"/>
+                <outlet property="knockoutView" destination="LlZ-PJ-h4w" id="Zcv-ra-OFo"/>
+                <outlet property="tableView" destination="7qR-pQ-g0s" id="8DB-Bc-twe"/>
                 <outlet property="view" destination="5Yg-Nv-03m" id="Y2P-FK-Iae"/>
             </connections>
         </placeholder>
@@ -18,58 +17,63 @@
             <rect key="frame" x="0.0" y="0.0" width="298" height="407"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NkH-cS-cq6">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HHo-la-UOb">
                     <rect key="frame" x="0.0" y="0.0" width="298" height="407"/>
-                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Q5v-gg-PyO">
-                        <rect key="frame" x="0.0" y="0.0" width="298" height="407"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                    </view>
-                    <blurEffect style="extraLight"/>
-                </visualEffectView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3W7-r3-MuN">
-                    <rect key="frame" x="0.0" y="359" width="298" height="48"/>
+                    <subviews>
+                        <view opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="NKM-mg-qA0" userLabel="Table Container">
+                            <rect key="frame" x="0.0" y="0.0" width="298" height="407"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LlZ-PJ-h4w" customClass="_UIDimmingKnockoutBackdropView">
+                                    <rect key="frame" x="0.0" y="0.0" width="298" height="407"/>
+                                </view>
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="7qR-pQ-g0s">
+                                    <rect key="frame" x="0.0" y="44" width="298" height="363"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-1" id="aVl-pX-eIz"/>
+                                        <outlet property="delegate" destination="-1" id="tSr-Lp-jNv"/>
+                                    </connections>
+                                </tableView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="apple-pay-mini.png" translatesAutoresizingMaskIntoConstraints="NO" id="A8O-da-IDG">
+                                    <rect key="frame" x="16" y="11.5" width="45" height="22"/>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.0" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="LlZ-PJ-h4w" secondAttribute="bottom" id="1Ws-yt-rYB"/>
+                                <constraint firstItem="7qR-pQ-g0s" firstAttribute="leading" secondItem="NKM-mg-qA0" secondAttribute="leading" id="1Yc-kL-imb"/>
+                                <constraint firstAttribute="trailing" secondItem="LlZ-PJ-h4w" secondAttribute="trailing" id="3p0-uy-xwd"/>
+                                <constraint firstItem="LlZ-PJ-h4w" firstAttribute="leading" secondItem="NKM-mg-qA0" secondAttribute="leading" id="LvT-4S-7mD"/>
+                                <constraint firstAttribute="trailing" secondItem="7qR-pQ-g0s" secondAttribute="trailing" id="egN-eM-3ox"/>
+                                <constraint firstAttribute="bottom" secondItem="7qR-pQ-g0s" secondAttribute="bottom" id="gIN-b2-f8j"/>
+                                <constraint firstItem="LlZ-PJ-h4w" firstAttribute="top" secondItem="NKM-mg-qA0" secondAttribute="top" id="odB-pZ-FnA"/>
+                                <constraint firstItem="7qR-pQ-g0s" firstAttribute="top" secondItem="NKM-mg-qA0" secondAttribute="top" constant="44" id="qf8-ik-74V"/>
+                            </constraints>
+                        </view>
+                    </subviews>
                     <constraints>
-                        <constraint firstAttribute="height" constant="48" id="uH4-7h-pNc"/>
+                        <constraint firstItem="NKM-mg-qA0" firstAttribute="top" secondItem="HHo-la-UOb" secondAttribute="top" id="YIw-zc-Kro"/>
+                        <constraint firstAttribute="trailing" secondItem="NKM-mg-qA0" secondAttribute="trailing" id="YSZ-Wv-sJg"/>
+                        <constraint firstAttribute="bottom" secondItem="NKM-mg-qA0" secondAttribute="bottom" id="bh2-EE-aui"/>
+                        <constraint firstItem="NKM-mg-qA0" firstAttribute="leading" secondItem="HHo-la-UOb" secondAttribute="leading" id="rHs-lD-ya4"/>
                     </constraints>
-                    <state key="normal" title="Pay">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="makePayment:" destination="-1" eventType="touchUpInside" id="KSE-ol-b6u"/>
-                    </connections>
-                </button>
-                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="HWL-sz-1EN">
-                    <rect key="frame" x="139" y="373" width="20" height="20"/>
-                </activityIndicatorView>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="8" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="7xh-V2-Cso">
-                    <rect key="frame" x="0.0" y="30" width="298" height="329"/>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                    <connections>
-                        <outlet property="dataSource" destination="-1" id="yHS-Xa-uTm"/>
-                        <outlet property="delegate" destination="-1" id="Dey-iQ-ERm"/>
-                    </connections>
-                </tableView>
+                </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="7xh-V2-Cso" secondAttribute="trailing" id="7FB-yW-5MV"/>
-                <constraint firstAttribute="bottom" secondItem="3W7-r3-MuN" secondAttribute="bottom" id="FbM-MT-8e6"/>
-                <constraint firstItem="3W7-r3-MuN" firstAttribute="leading" secondItem="5Yg-Nv-03m" secondAttribute="leading" id="HQD-tx-QQo"/>
-                <constraint firstItem="7xh-V2-Cso" firstAttribute="leading" secondItem="5Yg-Nv-03m" secondAttribute="leading" id="PFC-7L-Nn5"/>
-                <constraint firstAttribute="trailing" secondItem="NkH-cS-cq6" secondAttribute="trailing" id="YSc-WJ-Lz0"/>
-                <constraint firstItem="7xh-V2-Cso" firstAttribute="top" secondItem="5Yg-Nv-03m" secondAttribute="top" constant="30" id="ZgZ-at-xth"/>
-                <constraint firstItem="HWL-sz-1EN" firstAttribute="centerY" secondItem="3W7-r3-MuN" secondAttribute="centerY" id="dXT-ul-c7b"/>
-                <constraint firstAttribute="bottom" secondItem="NkH-cS-cq6" secondAttribute="bottom" id="gav-lY-CZV"/>
-                <constraint firstItem="HWL-sz-1EN" firstAttribute="centerX" secondItem="3W7-r3-MuN" secondAttribute="centerX" id="h9j-cm-VP6"/>
-                <constraint firstItem="NkH-cS-cq6" firstAttribute="top" secondItem="5Yg-Nv-03m" secondAttribute="top" id="pD3-zK-B2g"/>
-                <constraint firstItem="3W7-r3-MuN" firstAttribute="top" secondItem="7xh-V2-Cso" secondAttribute="bottom" id="rv9-u2-9pX"/>
-                <constraint firstAttribute="trailing" secondItem="3W7-r3-MuN" secondAttribute="trailing" id="s6c-5I-Pq2"/>
-                <constraint firstItem="NkH-cS-cq6" firstAttribute="leading" secondItem="5Yg-Nv-03m" secondAttribute="leading" id="x8Y-Iy-8sQ"/>
+                <constraint firstAttribute="bottom" secondItem="HHo-la-UOb" secondAttribute="bottom" id="1WV-Jr-ki7"/>
+                <constraint firstItem="HHo-la-UOb" firstAttribute="leading" secondItem="5Yg-Nv-03m" secondAttribute="leading" id="5gw-9Y-TS8"/>
+                <constraint firstItem="HHo-la-UOb" firstAttribute="top" secondItem="5Yg-Nv-03m" secondAttribute="top" id="MB8-gH-yn7"/>
+                <constraint firstAttribute="trailing" secondItem="HHo-la-UOb" secondAttribute="trailing" id="hah-Yj-KOe"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
-            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <nil key="simulatedTopBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="453" y="324.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="apple-pay-mini.png" width="45" height="22"/>
+    </resources>
 </document>
