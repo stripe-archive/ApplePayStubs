@@ -15,7 +15,7 @@
 
 - (instancetype)initWithPaymentRequest:(PKPaymentRequest *)paymentRequest;
 @property(nonatomic, assign)id<PKPaymentAuthorizationViewControllerDelegate>delegate;
-
+@property (nonatomic) UIView *dimmingView2;
 @end
 
 #endif

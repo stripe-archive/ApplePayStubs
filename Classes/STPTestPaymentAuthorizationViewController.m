@@ -13,7 +13,6 @@
 
 @interface STPTestPaymentAuthorizationViewController()<UIViewControllerTransitioningDelegate>
 @property (nonatomic) PKPaymentRequest *paymentRequest;
-@property (nonatomic) UIView *dimmingView2;
 @end
 
 @interface STPTestPaymentPresentationController : UIPresentationController
