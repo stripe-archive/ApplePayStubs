@@ -38,7 +38,7 @@ You create and use instances of `STPTestPaymentAuthorizationViewController` exac
 #else
     controller = [[PKPaymentAuthorizationViewController alloc] initWithPaymentRequest:request];
     controller.delegate = self;
-#endif
+
     [self presentViewController:controller];
 }
 ```
@@ -95,7 +95,7 @@ When the user finishes selecting a card, as usual `STPTestPaymentAuthorizationVi
     [Stripe createTokenWithPayment:payment
                     operationQueue:[NSOperationQueue mainQueue]
                         completion:tokenBlock];
-#endif
+
 }
 
 ```
