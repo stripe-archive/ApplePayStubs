@@ -100,7 +100,7 @@ When the user finishes selecting a card, as usual `STPTestPaymentAuthorizationVi
 
 ```
 
-(Note for the above example: Stripe tokens created from Apple Pay work interchangably with those created using manually-collected credit card details).
+(Note for the above example: Stripe tokens created from Apple Pay work interchangeably with those created using manually-collected credit card details).
 
 Example App / Learn More
 ---
