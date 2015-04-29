@@ -11,6 +11,9 @@
 #import <Foundation/Foundation.h>
 #import "STPTestDataStore.h"
 
+extern NSString * const STPSuccessfulChargeCardNumber;
+extern NSString * const STPFailingChargeCardNumber;
+
 @interface STPTestCardStore : NSObject <STPTestDataStore>
 @end
 
