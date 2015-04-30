@@ -20,7 +20,7 @@
 		04F39FB01AF152C7005B926E /* STPTestDataTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 04F39F9D1AF152C7005B926E /* STPTestDataTableViewController.h */; };
 		04F39FB11AF152C7005B926E /* STPTestDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F39F9E1AF152C7005B926E /* STPTestDataTableViewController.m */; };
 		04F39FB21AF152C7005B926E /* STPTestDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F39F9E1AF152C7005B926E /* STPTestDataTableViewController.m */; };
-		04F39FB31AF152C7005B926E /* STPTestPaymentAuthorizationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 04F39F9F1AF152C7005B926E /* STPTestPaymentAuthorizationViewController.h */; };
+		04F39FB31AF152C7005B926E /* STPTestPaymentAuthorizationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 04F39F9F1AF152C7005B926E /* STPTestPaymentAuthorizationViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		04F39FB41AF152C7005B926E /* STPTestPaymentAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F39FA01AF152C7005B926E /* STPTestPaymentAuthorizationViewController.m */; };
 		04F39FB51AF152C7005B926E /* STPTestPaymentAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F39FA01AF152C7005B926E /* STPTestPaymentAuthorizationViewController.m */; };
 		04F39FB61AF152C7005B926E /* STPTestPaymentSummaryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 04F39FA11AF152C7005B926E /* STPTestPaymentSummaryViewController.h */; };
@@ -159,12 +159,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				04F39FB01AF152C7005B926E /* STPTestDataTableViewController.h in Headers */,
+				04F39FB31AF152C7005B926E /* STPTestPaymentAuthorizationViewController.h in Headers */,
 				04F39FAF1AF152C7005B926E /* STPTestDataStore.h in Headers */,
 				04F39FA91AF152C7005B926E /* STPTestAddressStore.h in Headers */,
 				04F39FBB1AF152C7005B926E /* STPTestShippingMethodStore.h in Headers */,
 				04F39FAC1AF152C7005B926E /* STPTestCardStore.h in Headers */,
 				04F39FB61AF152C7005B926E /* STPTestPaymentSummaryViewController.h in Headers */,
-				04F39FB31AF152C7005B926E /* STPTestPaymentAuthorizationViewController.h in Headers */,
 				04F39F801AF15189005B926E /* ApplePayStubs.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -393,6 +393,7 @@
 		04F39F911AF15189005B926E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -404,12 +405,14 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
 		04F39F921AF15189005B926E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -420,6 +423,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
