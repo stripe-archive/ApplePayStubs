@@ -7,13 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <ApplePayStubs/STPTestPaymentAuthorizationViewController.h>
 
 //! Project version number for ApplePayStubs.
 FOUNDATION_EXPORT double ApplePayStubsVersionNumber;
 
 //! Project version string for ApplePayStubs.
 FOUNDATION_EXPORT const unsigned char ApplePayStubsVersionString[];
-
-// In this header, you should import all the public headers of your framework using statements like #import <ApplePayStubs/PublicHeader.h>
-
-

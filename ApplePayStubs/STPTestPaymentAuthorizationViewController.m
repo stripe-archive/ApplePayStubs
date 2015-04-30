@@ -21,8 +21,7 @@
 @implementation STPTestPaymentAuthorizationViewController
 
 - (instancetype)initWithPaymentRequest:(PKPaymentRequest *)paymentRequest {
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    self = [self initWithNibName:nil bundle:bundle];
+    self = [self initWithNibName:nil bundle:nil];
     if (self) {
         _paymentRequest = paymentRequest;
         self.transitioningDelegate = self;

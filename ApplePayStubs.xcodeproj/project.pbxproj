@@ -10,9 +10,6 @@
 		04F39F801AF15189005B926E /* ApplePayStubs.h in Headers */ = {isa = PBXBuildFile; fileRef = 04F39F7F1AF15189005B926E /* ApplePayStubs.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		04F39F861AF15189005B926E /* ApplePayStubs.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04F39F7A1AF15189005B926E /* ApplePayStubs.framework */; };
 		04F39F8D1AF15189005B926E /* ApplePayStubsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F39F8C1AF15189005B926E /* ApplePayStubsTests.m */; };
-		04F39FA61AF152C7005B926E /* PKPayment+STPTestKeys.h in Headers */ = {isa = PBXBuildFile; fileRef = 04F39F961AF152C7005B926E /* PKPayment+STPTestKeys.h */; };
-		04F39FA71AF152C7005B926E /* PKPayment+STPTestKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F39F971AF152C7005B926E /* PKPayment+STPTestKeys.m */; };
-		04F39FA81AF152C7005B926E /* PKPayment+STPTestKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F39F971AF152C7005B926E /* PKPayment+STPTestKeys.m */; };
 		04F39FA91AF152C7005B926E /* STPTestAddressStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 04F39F981AF152C7005B926E /* STPTestAddressStore.h */; };
 		04F39FAA1AF152C7005B926E /* STPTestAddressStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F39F991AF152C7005B926E /* STPTestAddressStore.m */; };
 		04F39FAB1AF152C7005B926E /* STPTestAddressStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F39F991AF152C7005B926E /* STPTestAddressStore.m */; };
@@ -23,7 +20,7 @@
 		04F39FB01AF152C7005B926E /* STPTestDataTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 04F39F9D1AF152C7005B926E /* STPTestDataTableViewController.h */; };
 		04F39FB11AF152C7005B926E /* STPTestDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F39F9E1AF152C7005B926E /* STPTestDataTableViewController.m */; };
 		04F39FB21AF152C7005B926E /* STPTestDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F39F9E1AF152C7005B926E /* STPTestDataTableViewController.m */; };
-		04F39FB31AF152C7005B926E /* STPTestPaymentAuthorizationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 04F39F9F1AF152C7005B926E /* STPTestPaymentAuthorizationViewController.h */; };
+		04F39FB31AF152C7005B926E /* STPTestPaymentAuthorizationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 04F39F9F1AF152C7005B926E /* STPTestPaymentAuthorizationViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		04F39FB41AF152C7005B926E /* STPTestPaymentAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F39FA01AF152C7005B926E /* STPTestPaymentAuthorizationViewController.m */; };
 		04F39FB51AF152C7005B926E /* STPTestPaymentAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04F39FA01AF152C7005B926E /* STPTestPaymentAuthorizationViewController.m */; };
 		04F39FB61AF152C7005B926E /* STPTestPaymentSummaryViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 04F39FA11AF152C7005B926E /* STPTestPaymentSummaryViewController.h */; };
@@ -53,8 +50,6 @@
 		04F39F851AF15189005B926E /* ApplePayStubsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ApplePayStubsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		04F39F8B1AF15189005B926E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		04F39F8C1AF15189005B926E /* ApplePayStubsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplePayStubsTests.m; sourceTree = "<group>"; };
-		04F39F961AF152C7005B926E /* PKPayment+STPTestKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PKPayment+STPTestKeys.h"; sourceTree = "<group>"; };
-		04F39F971AF152C7005B926E /* PKPayment+STPTestKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PKPayment+STPTestKeys.m"; sourceTree = "<group>"; };
 		04F39F981AF152C7005B926E /* STPTestAddressStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPTestAddressStore.h; sourceTree = "<group>"; };
 		04F39F991AF152C7005B926E /* STPTestAddressStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STPTestAddressStore.m; sourceTree = "<group>"; };
 		04F39F9A1AF152C7005B926E /* STPTestCardStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STPTestCardStore.h; sourceTree = "<group>"; };
@@ -112,8 +107,6 @@
 			isa = PBXGroup;
 			children = (
 				04F39F7F1AF15189005B926E /* ApplePayStubs.h */,
-				04F39F961AF152C7005B926E /* PKPayment+STPTestKeys.h */,
-				04F39F971AF152C7005B926E /* PKPayment+STPTestKeys.m */,
 				04F39F981AF152C7005B926E /* STPTestAddressStore.h */,
 				04F39F991AF152C7005B926E /* STPTestAddressStore.m */,
 				04F39F9A1AF152C7005B926E /* STPTestCardStore.h */,
@@ -166,13 +159,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				04F39FB01AF152C7005B926E /* STPTestDataTableViewController.h in Headers */,
+				04F39FB31AF152C7005B926E /* STPTestPaymentAuthorizationViewController.h in Headers */,
 				04F39FAF1AF152C7005B926E /* STPTestDataStore.h in Headers */,
 				04F39FA91AF152C7005B926E /* STPTestAddressStore.h in Headers */,
 				04F39FBB1AF152C7005B926E /* STPTestShippingMethodStore.h in Headers */,
-				04F39FA61AF152C7005B926E /* PKPayment+STPTestKeys.h in Headers */,
 				04F39FAC1AF152C7005B926E /* STPTestCardStore.h in Headers */,
 				04F39FB61AF152C7005B926E /* STPTestPaymentSummaryViewController.h in Headers */,
-				04F39FB31AF152C7005B926E /* STPTestPaymentAuthorizationViewController.h in Headers */,
 				04F39F801AF15189005B926E /* ApplePayStubs.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,7 +270,6 @@
 				04F39FB71AF152C7005B926E /* STPTestPaymentSummaryViewController.m in Sources */,
 				04F39FAA1AF152C7005B926E /* STPTestAddressStore.m in Sources */,
 				04F39FB41AF152C7005B926E /* STPTestPaymentAuthorizationViewController.m in Sources */,
-				04F39FA71AF152C7005B926E /* PKPayment+STPTestKeys.m in Sources */,
 				04F39FBC1AF152C7005B926E /* STPTestShippingMethodStore.m in Sources */,
 				04F39FB11AF152C7005B926E /* STPTestDataTableViewController.m in Sources */,
 				04F39FAD1AF152C7005B926E /* STPTestCardStore.m in Sources */,
@@ -294,7 +285,6 @@
 				04F39F8D1AF15189005B926E /* ApplePayStubsTests.m in Sources */,
 				04F39FB81AF152C7005B926E /* STPTestPaymentSummaryViewController.m in Sources */,
 				04F39FB21AF152C7005B926E /* STPTestDataTableViewController.m in Sources */,
-				04F39FA81AF152C7005B926E /* PKPayment+STPTestKeys.m in Sources */,
 				04F39FBD1AF152C7005B926E /* STPTestShippingMethodStore.m in Sources */,
 				04F39FAE1AF152C7005B926E /* STPTestCardStore.m in Sources */,
 			);
@@ -403,6 +393,7 @@
 		04F39F911AF15189005B926E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -414,12 +405,14 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
 		04F39F921AF15189005B926E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -430,6 +423,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
