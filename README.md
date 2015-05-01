@@ -93,6 +93,8 @@ When the user finishes selecting a card, as usual `STPTestPaymentAuthorizationVi
 
 (Note: Stripe tokens created from Apple Pay work interchangeably with those created using manually-collected credit card details).
 
+If you're not using Stripe, you can find the selected card information on the `PKPayment`'s `PKPaymentToken` in the `transactionIdentifier` field, in the format `"ApplePayStubs~{card_number}~{amount_in_cents}~{currency}~{uuid}"`.
+
 Example App / Learn More
 ---
 
