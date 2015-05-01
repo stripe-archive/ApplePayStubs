@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "ApplePayStubs"
-  s.version      = "0.1.4"
+  s.version      = "0.2"
   s.summary      = "Test your Apple Pay integration without Apple Pay"
   s.description  = <<-DESC
                   ApplePayStubs lets you test your Apple Pay integration without needing a compatible device.
