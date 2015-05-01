@@ -70,37 +70,28 @@ You create and use instances of `STPTestPaymentAuthorizationViewController` exac
 ```
 
 When the user finishes selecting a card, as usual `STPTestPaymentAuthorizationViewController` will call `paymentAuthorizationViewController:didAuthorizePayment:completion` on its delegate.
- This usually includes a `PKPayment` that contains encrypted credit card data that you'd pass off to your payment processor (such as Stripe). To approximate this functionality, we attach a credit card number to the `PKPayment` under the `stp_testCardNumber` property. If you're using Stripe to handle this token, you can use our existing card APIs to turn this into a token:
+ This delegate method includes a `PKPayment` object, which itself has an instance of `PKPaymentToken` that contains encrypted credit card data that you'd pass off to your payment processor (such as Stripe). While the `PKPayment` and `PKPaymentToken` returned by ApplePayStubs have stubbed (and invalid) versions of this data, the Stripe API will be able to recognize them in testmode. As such, you shouldn't have to modify your existing `PKPaymentAuthorizationViewControllerDelegate` methods:
 
 ```objc
 - (void)paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)controller
                        didAuthorizePayment:(PKPayment *)payment
                                 completion:(void (^)(PKPaymentAuthorizationStatus))completion {
-    void(^tokenBlock)(STPToken *token, NSError *error) = ^void(STPToken *token, NSError *error) {
-        if (error) {
-            completion(PKPaymentAuthorizationStatusFailure);
-        }
-        else {
-            [self createBackendChargeWithToken:token completion:completion];
-        }
-    };
-#if DEBUG
-    STPCard *card = [STPCard new];
-    card.number = payment.stp_testCardNumber;
-    card.expMonth = 12;
-    card.expYear = 2020;
-    card.cvc = @"123";
-    [Stripe createTokenWithCard:card completion:tokenBlock];
-#else
-    [Stripe createTokenWithPayment:payment
-                    operationQueue:[NSOperationQueue mainQueue]
-                        completion:tokenBlock];
-
+                                
+    [[STPAPIClient sharedClient] createTokenWithPayment:payment
+        completion:^(STPToken *token, NSError *error) {
+            [self createBackendChargeWithToken:token
+                                    completion:^(STPBackendChargeResult status, NSError *error) {
+                if (status == STPBackendChargeResultSuccess) {
+                    completion(PKPaymentAuthorizationStatusSuccess);
+                } else {
+                    completion(PKPaymentAuthorizationStatusFailure);
+                }
+        }];
+    }];
 }
-
 ```
 
-(Note for the above example: Stripe tokens created from Apple Pay work interchangeably with those created using manually-collected credit card details).
+(Note: Stripe tokens created from Apple Pay work interchangeably with those created using manually-collected credit card details).
 
 Example App / Learn More
 ---
