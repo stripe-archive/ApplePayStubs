@@ -29,7 +29,6 @@
                 @"state": @"CA",
                 @"zip": @"95014",
                 @"country": @"United States",
-                @"countryCode": @"US",
                 @"phone": @"888 555-1212",
             },
             @{
@@ -40,7 +39,6 @@
                 @"state": @"DC",
                 @"zip": @"20500",
                 @"country": @"United States",
-                @"countryCode": @"US",
                 @"phone": @"888 867-5309",
             },
             @{
@@ -51,7 +49,6 @@
                 @"state": @"",
                 @"zip": @"",
                 @"country": @"United Kingdom",
-                @"countryCode": @"GB",
                 @"phone": @"07 987 654 321",
             },
         ];
