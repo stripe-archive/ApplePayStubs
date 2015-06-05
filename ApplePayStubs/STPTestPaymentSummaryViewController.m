@@ -79,7 +79,8 @@ NSString *const STPTestPaymentSectionTitlePayment = @"Payment";
     [self updateSectionTitles];
     [self.tableView registerClass:[STPTestPaymentSummaryItemCell class] forCellReuseIdentifier:STPTestPaymentAuthorizationSummaryItemIdentifier];
     [self.tableView registerClass:[STPTestPaymentDataCell class] forCellReuseIdentifier:STPTestPaymentAuthorizationTestDataIdentifier];
-    if (self.paymentRequest.requiredShippingAddressFields != PKAddressFieldNone) {
+    // Real Apple Pay sheet only calls delegate when postal address is in requiredShippingAddressFields
+    if (self.paymentRequest.requiredShippingAddressFields & PKAddressFieldPostalAddress) {
         [self didSelectShippingAddress];
     }
 }
@@ -264,7 +265,12 @@ NSString *const STPTestPaymentSectionTitlePayment = @"Payment";
     id<STPTestDataStore> store = [self storeForSection:self.sectionTitles[indexPath.section]];
     STPTestDataTableViewController *controller = [[STPTestDataTableViewController alloc] initWithStore:store];
     if (store == self.shippingAddressStore) {
-        controller.callback = ^void(id item) { [self didSelectShippingAddress]; };
+        controller.callback = ^void(id item) {
+            // Real Apple Pay sheet only calls delegate when postal address is in requiredShippingAddressFields
+            if (self.paymentRequest.requiredShippingAddressFields & PKAddressFieldPostalAddress) {
+                [self didSelectShippingAddress];
+            }
+        };
     }
     if (store == self.shippingMethodStore) {
         controller.callback = ^void(id item) {

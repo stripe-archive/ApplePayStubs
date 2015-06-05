@@ -28,7 +28,7 @@
                 @"city": @"Cupertino",
                 @"state": @"CA",
                 @"zip": @"95014",
-                @"country": @"US",
+                @"country": @"United States",
                 @"phone": @"888 555-1212",
             },
             @{
@@ -38,7 +38,7 @@
                 @"city": @"Washington",
                 @"state": @"DC",
                 @"zip": @"20500",
-                @"country": @"US",
+                @"country": @"United States",
                 @"phone": @"888 867-5309",
             },
             @{
@@ -48,7 +48,7 @@
                 @"city": @"London",
                 @"state": @"",
                 @"zip": @"",
-                @"country": @"UK",
+                @"country": @"United Kingdom",
                 @"phone": @"07 987 654 321",
             },
         ];
@@ -67,8 +67,8 @@
 
     // address
     ABMutableMultiValueRef address = ABMultiValueCreateMutable(kABDictionaryPropertyType);
-    CFStringRef keys[5];
-    CFStringRef values[5];
+    CFStringRef keys[6];
+    CFStringRef values[6];
     CFIndex numValues = 0;
 
     if (!obscure) {
@@ -83,7 +83,10 @@
     values[numValues++] = CFBridgingRetain(item[@"zip"]);
     keys[numValues] = kABPersonAddressCountryKey;
     values[numValues++] = CFBridgingRetain(item[@"country"]);
+    keys[numValues] = kABPersonAddressCountryCodeKey;
+    values[numValues++] = CFBridgingRetain(item[@"countryCode"]);
 
+    
     CFDictionaryRef aDict = CFDictionaryCreate(
         kCFAllocatorDefault, (const void **)keys, (const void **)values, numValues, &kCFCopyStringDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
 
