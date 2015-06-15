@@ -1,6 +1,10 @@
 ApplePayStubs
 ===
 
+First, some big news!
+---
+This library exists because as of iOS8 it was impossible to display a `PKPaymentAuthorizationViewController` (a.k.a. an Apple Pay payment sheet) in the iOS simulator. Fortunately, this is no longer necessary - as of iOS 9, Apple Pay works in the simulator, and returns dummy test cards. In other words, ApplePayStubs has been [sherlocked](http://www.urbandictionary.com/define.php?term=sherlocked)! As such, consider this library deprecated as of iOS 9. If you're interested in using it until the iOS 9 / Xcode 7 release, though, read on!
+
 What is this?
 ---
 
