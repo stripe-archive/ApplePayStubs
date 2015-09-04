@@ -42,6 +42,7 @@ You create and use instances of `STPTestPaymentAuthorizationViewController` exac
 #else
     controller = [[PKPaymentAuthorizationViewController alloc] initWithPaymentRequest:request];
     controller.delegate = self;
+#endif
 
     [self presentViewController:controller];
 }
