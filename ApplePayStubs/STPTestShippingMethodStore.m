@@ -43,7 +43,9 @@
             return;
         }
     }
-    self.selectedItem = shippingMethods[0];
+    if (shippingMethods.count > 0) {
+        self.selectedItem = shippingMethods[0];
+    }
 }
 
 @end
