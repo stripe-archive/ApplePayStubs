@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Stripe. All rights reserved.
 //
 
-
+@import PassKit;
 #import "STPTestAddressStore.h"
 
 @interface STPTestAddressStore ()
@@ -121,6 +121,35 @@
     }
     return CFAutorelease(record);
 }
+
+#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
+- (PKContact *)pkContactForSelectedItemObscure:(BOOL)obscure {
+    id item = self.selectedItem;
+    PKContact *contact = [[PKContact alloc] init];
+    
+    CNMutablePostalAddress *postalAddress = [[CNMutablePostalAddress alloc] init];
+    if(!obscure) {
+        postalAddress.street = item[@"line1"];
+    }
+    postalAddress.city = item[@"city"];
+    postalAddress.state = item[@"state"];
+    postalAddress.postalCode = item[@"zip"];
+    postalAddress.country = item[@"country"];
+    postalAddress.ISOCountryCode = item[@"countryCode"];
+    contact.postalAddress = postalAddress;
+    
+    if(!obscure) {
+        NSPersonNameComponents *personName = [[NSPersonNameComponents alloc] init];
+        personName.givenName = [item[@"name"] componentsSeparatedByString:@" "].firstObject;
+        personName.familyName = [item[@"name"] componentsSeparatedByString:@" "].lastObject;
+        contact.name = personName;
+        
+        contact.phoneNumber = [CNPhoneNumber phoneNumberWithStringValue:item[@"phone"]];
+        contact.emailAddress = item[@"email"];
+    }
+    return contact;
+}
+#endif
 
 @end
 

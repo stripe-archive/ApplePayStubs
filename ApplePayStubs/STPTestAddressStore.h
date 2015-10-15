@@ -15,6 +15,9 @@
 @interface STPTestAddressStore : NSObject<STPTestDataStore>
 
 - (ABRecordRef)contactForSelectedItemObscure:(BOOL)obscure;
+#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
+- (PKContact *)pkContactForSelectedItemObscure:(BOOL)obscure;
+#endif
 
 @end
 

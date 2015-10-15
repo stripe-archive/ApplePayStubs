@@ -135,6 +135,18 @@ NSString *const STPTestPaymentSectionTitlePayment = @"Payment";
     if ([payment respondsToSelector:@selector(setBillingAddress:)] && billingRecord) {
         [payment performSelector:@selector(setBillingAddress:) withObject:(__bridge id)(billingRecord)];
     }
+#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
+    if ([PKContact class]) {
+        PKContact *shippingContact = [self.shippingAddressStore pkContactForSelectedItemObscure:NO];
+        if ([payment respondsToSelector:@selector(setShippingContact:)] && shippingContact) {
+            [payment performSelector:@selector(setShippingContact:) withObject:shippingContact];
+        }
+        PKContact *billingContact = [self.billingAddressStore pkContactForSelectedItemObscure:NO];
+        if ([payment respondsToSelector:@selector(setBillingContact:)] && billingContact) {
+            [payment performSelector:@selector(setBillingContact:) withObject:billingContact];
+        }
+    }
+#endif
 #pragma clang diagnostic pop
     
     PKPaymentAuthorizationViewController *auth = (PKPaymentAuthorizationViewController *)self;
