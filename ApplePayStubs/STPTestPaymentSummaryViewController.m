@@ -270,6 +270,29 @@ NSString *const STPTestPaymentSectionTitlePayment = @"Payment";
                                                    [self.activityIndicator stopAnimating];
                                                }];
     }
+#if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
+    else if([self.delegate respondsToSelector:@selector(paymentAuthorizationViewController:didSelectShippingContact:completion:)]) {
+        [self.activityIndicator startAnimating];
+        self.payButton.enabled = NO;
+        self.tableView.userInteractionEnabled = NO;
+        PKContact *contact = [self.shippingAddressStore pkContactForSelectedItemObscure:YES];
+        [self.delegate paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)self
+                                 didSelectShippingContact:contact
+                                               completion:^(PKPaymentAuthorizationStatus status, NSArray *shippingMethods, NSArray *summaryItems) {
+                                                   if (status == PKPaymentAuthorizationStatusFailure) {
+                                                       [self.delegate paymentAuthorizationViewControllerDidFinish:(PKPaymentAuthorizationViewController *)self];
+                                                       return;
+                                                   }
+                                                   self.summaryItems = summaryItems;
+                                                   [self.shippingMethodStore setShippingMethods:shippingMethods];
+                                                   [self updateSectionTitles];
+                                                   [self.tableView reloadData];
+                                                   self.payButton.enabled = YES;
+                                                   self.tableView.userInteractionEnabled = YES;
+                                                   [self.activityIndicator stopAnimating];
+                                               }];
+    }
+#endif
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
