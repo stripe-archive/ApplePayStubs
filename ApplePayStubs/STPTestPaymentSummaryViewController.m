@@ -127,6 +127,9 @@ NSString *const STPTestPaymentSectionTitlePayment = @"Payment";
     if ([payment respondsToSelector:@selector(setShippingMethod:)] && self.shippingMethodStore.selectedItem) {
         [payment performSelector:@selector(setShippingMethod:) withObject:self.shippingMethodStore.selectedItem];
     }
+    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     ABRecordRef shippingRecord = [self.shippingAddressStore contactForSelectedItemObscure:NO];
     if ([payment respondsToSelector:@selector(setShippingAddress:)] && shippingRecord) {
         [payment performSelector:@selector(setShippingAddress:) withObject:(__bridge id)(shippingRecord)];
@@ -135,6 +138,8 @@ NSString *const STPTestPaymentSectionTitlePayment = @"Payment";
     if ([payment respondsToSelector:@selector(setBillingAddress:)] && billingRecord) {
         [payment performSelector:@selector(setBillingAddress:) withObject:(__bridge id)(billingRecord)];
     }
+#pragma clang diagnostic pop
+    
 #if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
     if ([PKContact class]) {
         PKContact *shippingContact = [self.shippingAddressStore pkContactForSelectedItemObscure:NO];
@@ -253,6 +258,8 @@ NSString *const STPTestPaymentSectionTitlePayment = @"Payment";
         [self.activityIndicator startAnimating];
         self.payButton.enabled = NO;
         self.tableView.userInteractionEnabled = NO;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         ABRecordRef record = [self.shippingAddressStore contactForSelectedItemObscure:YES];
         [self.delegate paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)self
                                  didSelectShippingAddress:record
@@ -269,6 +276,7 @@ NSString *const STPTestPaymentSectionTitlePayment = @"Payment";
                                                    self.tableView.userInteractionEnabled = YES;
                                                    [self.activityIndicator stopAnimating];
                                                }];
+#pragma clang diagnostic pop
     }
 #if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
     else if([self.delegate respondsToSelector:@selector(paymentAuthorizationViewController:didSelectShippingContact:completion:)]) {

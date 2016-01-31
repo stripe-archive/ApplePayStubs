@@ -61,6 +61,9 @@
     return @[item[@"name"], item[@"line1"]];
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
 - (ABRecordRef)contactForSelectedItemObscure:(BOOL)obscure {
     id item = self.selectedItem;
     ABRecordRef record = ABPersonCreate();
@@ -121,6 +124,7 @@
     }
     return CFAutorelease(record);
 }
+#pragma clang diagnostic pop
 
 #if defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 90000
 - (PKContact *)pkContactForSelectedItemObscure:(BOOL)obscure {
