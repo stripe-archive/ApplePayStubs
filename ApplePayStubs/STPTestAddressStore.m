@@ -83,9 +83,10 @@
     values[numValues++] = CFBridgingRetain(item[@"zip"]);
     keys[numValues] = kABPersonAddressCountryKey;
     values[numValues++] = CFBridgingRetain(item[@"country"]);
-    keys[numValues] = kABPersonAddressCountryCodeKey;
-    values[numValues++] = CFBridgingRetain(item[@"countryCode"]);
-
+    if (item[@"countryCode"]) {
+        keys[numValues] = kABPersonAddressCountryCodeKey;
+        values[numValues++] = CFBridgingRetain(item[@"countryCode"]);
+    }
     
     CFDictionaryRef aDict = CFDictionaryCreate(
         kCFAllocatorDefault, (const void **)keys, (const void **)values, numValues, &kCFCopyStringDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
