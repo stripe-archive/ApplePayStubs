@@ -23,7 +23,7 @@ ApplePayStubs also depends on the `PassKit` framework.
 
 Installation
 ---
-Use Cocoapods or manually add the files to your repository.
+Use CocoaPods or manually add the files to your repository.
 
 Usage
 ---
